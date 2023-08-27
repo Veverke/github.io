@@ -1,0 +1,11 @@
+{
+    "liveServer.settings.port": 5501,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.https": {
+      "enable": true,
+      "cert": "/Users/avrei/source/repos/YizkorBookWebDemo/localhost.pem",
+      "key": "/Users/avrei/source/repos/YizkorBookWebDemo/localhost.key",
+      "passphrase": "avrahamykahana"
+    }
+  }

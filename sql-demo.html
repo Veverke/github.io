@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>YB Term Searcher Demo</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css">
+        <link rel="stylesheet" href="demo.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.2.2/dist/worker.sql-wasm.js"></script>
+      </head>
+    <body>
+        <button id="btnImportDb" onclick="document.getElementById('dbFile').click()">Import .db file</button>
+        <input type="file" id="dbFile" style="display:none">
+        <br />
+        <hr />
+        <label id="lblSearch">Search term: </label><input type="text" width="80"/>
+        <button id="btnSearch">
+            Search
+        </button>
+        <hr />
+
+
+        <main>
+            <label for='commands'>Enter some SQL</label>
+            <br>
+        
+            <textarea id="commands">
+
+            </textarea>
+            <br />
+            <button id="execute" class="button">Execute</button>
+            <button id='savedb' class="button">Save the db</button>
+            <label class="button">Load an SQLite database file: <input type='file' id='dbfile'></label>
+        
+            <div id="error" class="error"></div>
+        
+            <pre id="output">Results will be displayed here</pre>
+          </main>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+
+          <script src="sql-demo.js"></script>
+        </body>
+</html>
