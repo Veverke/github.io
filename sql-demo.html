@@ -5,34 +5,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css">
         <link rel="stylesheet" href="demo.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/0.3.2/js/sql.js"></script>
+        <link rel="stylesheet" href="style.css">
       </head>
     <body>
         <p>
           <b><u>Instructions</u></b>:
             <ol>
-              <li>1. Click the import button to import an Yizkor Book database.</li>
+              <li>1. Pick up an Yizkor Book from the drop down list.</li>
               <li>2. Enter a search term in the search textbox. Keep in mind that YBs are either in Hebrew or Yiddish.</li>
               <li>3. Clicking the page column in any given result entry, will open a new tab with that YB page.</li>
               <li>4. Follow the line and word number direction in the result entry to match the term you searched.</li>
             </ol>
         </p>
-        <select>
-          <option value="secureni">Secureni</option>
-          <option value="Novoselytsia">Novoselytsia</option>
+        <select id="dbSelect">
+          <option value="Secureni-56632812">Secureni</option>
+          <option value="Novoselitza-56611736">Novoselytsia</option>
         </select>
-        <button id="btnImportDb" onclick="document.getElementById('dbFile').click()">Import .db file</button>
-        <input type="file" id="dbFile" style="display:none"> <label id="lblImportedFile" style="margin: 0 0 0 10;"></label>
 
         <br />
         <hr />
         <label id="lblSearch">Search term: </label><input type="text" id="txtSearch" width="80"/>
         <!--<button id="btnSearch" disabled>-->
-        <button id="btnSearch">
+        <button id="btnSearch" disabled>
             Search
         </button>
         <hr />
-
-
         <main>
             <div id="error" class="error"></div>
             <pre id="output">Results will be displayed here</pre>

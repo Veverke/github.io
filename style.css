@@ -1,0 +1,6 @@
+tr:nth-child(2n) {background-color: aliceblue;}
+thead {background-color: #bab9f1}
+
+#output {font-size: large;}
+table {font-size: large;}
+td {padding: 5; text-align: center;}
