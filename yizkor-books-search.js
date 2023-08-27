@@ -1,5 +1,5 @@
 //copied from https://sql.js.org/examples/GUI/index.html
-var select = document.getElementById("dbSelect");
+var select = document.getElementById("ddlDbSelect");
 var btnSearch = document.getElementById("btnSearch");
 var txtSearch = document.getElementById("txtSearch");
 var outputElm = document.getElementById('output');
@@ -9,6 +9,7 @@ var townFinderLink = document.getElementById('lnkTownFinderLink');
 var startingImgId;
 var db;
 
+document.getElementById('lblYBsCount').textContent = `Total books: ${select.options.length}`;
 startingImgId = parseInt(select.value.split('-')[1].replace(/\.[^/.]+$/, ""));
 lblLanguage.textContent = select.selectedOptions[0].getAttribute('data-language');
 townFinderLink.setAttribute('href', select.selectedOptions[0].getAttribute('data-townfinder-link'));
@@ -101,7 +102,6 @@ var tableCreate = function () {
 btnSearch.addEventListener("click", () => 
 {
 	noerror()
-	//execute("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', "books/" + select.value + ".db", true);
@@ -152,4 +152,21 @@ function tic() { tictime = performance.now() }
 function toc(msg) {
 	var dt = performance.now() - tictime;
 	console.log((msg || 'toc') + ": " + dt + "ms");
+}
+
+function downloadFile(liElement, fileExtension, fileName) {
+	//https://stackoverflow.com/a/21016088/1219280
+	let link = document.createElement('a');
+	link.setAttribute('download', fileName ? `${fileName}.${fileExtension}` : `scraper ${document.title}.${fileExtension}`);
+
+	link.href = liElement.querySelector('a img').getAttribute('src');
+	console.log(link.href);
+	document.body.appendChild(link);
+
+	// wait for the link to be added to the document
+	window.requestAnimationFrame(() => {
+		let event = new MouseEvent('click');
+		link.dispatchEvent(event);
+		document.body.removeChild(link);
+	});
 }

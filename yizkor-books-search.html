@@ -25,26 +25,31 @@
             <ol>
               <li>Search 'engine' is very rudimentary. Currently only exact matches are supported.</li>
               <li>If you face a problem, please open an issue <a href="https://github.com/Veverke/veverke.github.io/issues">here</a>. I guess it requires a github account (perhaps logging it with google account works). If you can't log in, please email me the problem directly.</li>
-              <li><a href="https://github.com/Veverke/YizkorBooksDigitalizer/issues/3">Incosistent line numbering is a known issue</a>. Yizkor books do not have a fixed layout, and Google Cloud Vision api does not OCRs these layout, consistently. Edinet matches are not accurate.</li>
+              <li><a href="https://github.com/Veverke/YizkorBooksDigitalizer/issues/3">Incosistent line numbering is a known issue</a>. Yizkor books do not have a fixed layout, and Google Cloud Vision api does not OCRs these layouts consistently. Edinet matches are not accurate.</li>
               <li><a href="https://github.com/Veverke/YizkorBooksDigitalizer/issues">Backend issues</a></li>
               <li><a href="https://github.com/Veverke/veverke.github.io/issues">Frontend issues</a></li>
             </ol>
             
         </p>
-        <select id="dbSelect">
+        <hr />
+        <b><label id="lblYBsCount"></label></b><br /><br />
+        <select id="ddlDbSelect">
           <option value="Ataci-56978964" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2276004">Ataci</option>
           <option value="Briceni-5574993" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2276135">Briceni</option>
           <option value="Briceva-5575305" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2276136">Briceva</option>
+          <option value="Yedinetz-56633165" data-language="Yiddish/Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2277636">Edinet</option>
           <option value="Khotin-5671697" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-1041561">Khotin</option>
+          <option value="Lipcani1-5911177" data-language="Yiddish" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2276778">Lipcani 1</option>
+          <option value="Lipcani2-5752860" data-language="Yiddish" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2276778">Lipcani 2</option>
           <option value="Novoselitza-56611736" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-1048544">Novoselytsia</option>
           <option value="Secureni-56632812" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-1054565">Secureni</option>
-          <option value="Yedinetz-56633165" data-language="Yiddish/Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-2277636">Edinet</option>
+          <option value="Zychlin-56623134" data-language="Hebrew" data-townfinder-link="https://www.jewishgen.org/Communities/community.php?usbgn=-540274">Zychlin</option>
         </select>
 
         <label id="lblLanguageHeader">Language: </label><label id="lblLanguageValue"></label> <a id="lnkTownFinderLink" target="_blank" rel="noopener noreferrer" href="">JG TownFinder</a><label id="lblPages"></label>
         <br />
         <hr />
-        <label id="lblSearch">Search term: </label><input type="text" id="txtSearch" width="80"/>
+        <label id="lblSearch">Search term: </label><input type="text" id="txtSearch" width="80"/> <label id="lblSearchType"></label> <select id="ddlSearchType" disabled><option value="exact">Exact</option><option value="soundex">Soundex</option></select>
         <!--<button id="btnSearch" disabled>-->
         <button id="btnSearch" disabled>
             Search

@@ -4,8 +4,8 @@
     "liveServer.settings.CustomBrowser": "chrome",
     "liveServer.settings.https": {
       "enable": true,
-      "cert": "/Users/avrei/source/repos/YizkorBookWebDemo/localhost.pem",
-      "key": "/Users/avrei/source/repos/YizkorBookWebDemo/localhost.key",
+      "cert": "/Users/avrei/source/repos/veverke.github.io/localhost.pem",
+      "key": "/Users/avrei/source/repos/veverke.github.io/localhost.key",
       "passphrase": "avrahamykahana"
     }
   }
