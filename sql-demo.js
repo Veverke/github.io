@@ -1,11 +1,12 @@
 //copied from https://sql.js.org/examples/GUI/index.html
 
-var execBtn = document.getElementById("execute");
+var execBtn = document.getElementById("btnSearch");
+var txtSearch = document.getElementById("txtSearch");
 var outputElm = document.getElementById('output');
 var errorElm = document.getElementById('error');
-var commandsElm = document.getElementById('commands');
-var dbFileElm = document.getElementById('dbfile');
-var savedbElm = document.getElementById('savedb');
+var dbFileElm = document.getElementById('dbFile');
+var lblImportedFile = document.getElementById('lblImportedFile');
+var startingImgId;
 
 // Start the worker in which sql.js will run
 var worker = new Worker("worker.sql-wasm.js");
@@ -41,9 +42,28 @@ function execute(commands) {
 
 		tic();
 		outputElm.innerHTML = "";
+		if (results.length == 0)
+		{
+			outputElm.innerHTML = "No entries found for " + txtSearch.value + ". Try another term.";
+		}
+		else
+		{
+			outputElm.innerHTML = results[0].values.length + " entries found for " + txtSearch.value + ". <br />";
+		}
+
 		for (var i = 0; i < results.length; i++) {
 			outputElm.appendChild(tableCreate(results[i].columns, results[i].values));
 		}
+
+		//turn 1st column values into links
+		var tds = document.querySelectorAll('table tbody td:nth-child(1)');
+		for(var i = 0; i < tds.length; i++)
+		{
+			var imgId = startingImgId + parseInt(tds[i].textContent);
+			//webClient.DownloadFile($"https://images.nypl.org/index.php?id={imgId}&t=w", destinationFileName);
+			tds[i].innerHTML = `<a target="_blank" rel="noopener noreferrer" href='https://images.nypl.org/index.php?id=${imgId}&t=w'>` + tds[i].textContent + "</a>"
+		}
+
 		toc("Displaying results");
 	}
 	worker.postMessage({ action: 'exec', sql: commands });
@@ -69,8 +89,19 @@ var tableCreate = function () {
 
 // Execute the commands when the button is clicked
 function execEditorContents() {
+/*
+	var data = (async function()
+	{
+		let db = await getDBConnection();
+		let results = await db.all("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
+		await db.close();
+		return JSON(results);
+	})();
+	
+	return;
+*/
 	noerror()
-	execute(editor.getValue() + ';');
+	execute("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
 }
 execBtn.addEventListener("click", execEditorContents, true);
 
@@ -83,21 +114,6 @@ function toc(msg) {
 	console.log((msg || 'toc') + ": " + dt + "ms");
 }
 
-// Add syntax highlihjting to the textarea
-var editor = CodeMirror.fromTextArea(commandsElm, {
-	mode: 'text/x-mysql',
-	viewportMargin: Infinity,
-	indentWithTabs: true,
-	smartIndent: true,
-	lineNumbers: true,
-	matchBrackets: true,
-	autofocus: true,
-	extraKeys: {
-		"Ctrl-Enter": execEditorContents,
-		"Ctrl-S": savedb,
-	}
-});
-
 // Load a db from a file
 dbFileElm.onchange = function () {
 	var f = dbFileElm.files[0];
@@ -105,13 +121,14 @@ dbFileElm.onchange = function () {
 	r.onload = function () {
 		worker.onmessage = function () {
 			toc("Loading database from file");
-			// Show the schema of the loaded database
-			editor.setValue("SELECT `name`, `sql`\n  FROM `sqlite_master`\n  WHERE type='table';");
-			execEditorContents();
 		};
 		tic();
 		try {
 			worker.postMessage({ action: 'open', buffer: r.result }, [r.result]);
+			btnSearch.removeAttribute('disabled');
+			lblImportedFile.textContent = f.name;
+			startingImgId = parseInt(dbFileElm.files[0].name.split('-')[1].replace(/\.[^/.]+$/, ""));
+			
 		}
 		catch (exception) {
 			worker.postMessage({ action: 'open', buffer: r.result });
@@ -120,24 +137,21 @@ dbFileElm.onchange = function () {
 	r.readAsArrayBuffer(f);
 }
 
-// Save the db to a file
-function savedb() {
-	worker.onmessage = function (event) {
-		toc("Exporting the database");
-		var arraybuff = event.data.buffer;
-		var blob = new Blob([arraybuff]);
-		var a = document.createElement("a");
-		document.body.appendChild(a);
-		a.href = window.URL.createObjectURL(blob);
-		a.download = "sql.db";
-		a.onclick = function () {
-			setTimeout(function () {
-				window.URL.revokeObjectURL(a.href);
-			}, 1500);
-		};
-		a.click();
-	};
-	tic();
-	worker.postMessage({ action: 'export' });
+/*
+var SQL = (async function()
+{
+	return await initSqlJs({
+		// Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
+		// You can omit locateFile completely when running in node
+		locateFile: file => 'sql-wasm.wasm'
+	  });
+})();
+
+async function getDBConnection(){
+    const db = await sqlite.open({
+        filename: "/books/Secureni-56632812.db",
+        driver: sqlite3.Database
+    });
+    return db;
 }
-savedbElm.addEventListener("click", savedb, true);
+*/

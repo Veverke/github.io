@@ -7,11 +7,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
       </head>
     <body>
+        <p>
+          <b><u>Instructions</u></b>:
+            <ol>
+              <li>1. Click the import button to import an Yizkor Book database.</li>
+              <li>2. Enter a search term in the search textbox. Keep in mind that YBs are either in Hebrew or Yiddish.</li>
+              <li>3. Clicking the page column in any given result entry, will open a new tab with that YB page.</li>
+              <li>4. Follow the line and word number direction in the result entry to match the term you searched.</li>
+            </ol>
+        </p>
+        <select>
+          <option value="secureni">Secureni</option>
+          <option value="Novoselytsia">Novoselytsia</option>
+        </select>
         <button id="btnImportDb" onclick="document.getElementById('dbFile').click()">Import .db file</button>
-        <input type="file" id="dbFile" style="display:none">
+        <input type="file" id="dbFile" style="display:none"> <label id="lblImportedFile" style="margin: 0 0 0 10;"></label>
+
         <br />
         <hr />
-        <label id="lblSearch">Search term: </label><input type="text" width="80"/>
+        <label id="lblSearch">Search term: </label><input type="text" id="txtSearch" width="80"/>
+        <!--<button id="btnSearch" disabled>-->
         <button id="btnSearch">
             Search
         </button>
@@ -19,24 +34,11 @@
 
 
         <main>
-            <label for='commands'>Enter some SQL</label>
-            <br>
-        
-            <textarea id="commands">
-
-            </textarea>
-            <br />
-            <button id="execute" class="button">Execute</button>
-            <button id='savedb' class="button">Save the db</button>
-            <label class="button">Load an SQLite database file: <input type='file' id='dbfile'></label>
-        
             <div id="error" class="error"></div>
-        
             <pre id="output">Results will be displayed here</pre>
           </main>
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
-
           <script src="sql-demo.js"></script>
         </body>
 </html>
