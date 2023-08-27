@@ -3,4 +3,7 @@ thead {background-color: #bab9f1}
 
 #output {font-size: large;}
 table {font-size: large;}
-td {padding: 5; text-align: center;}
+td, th {padding: 5; text-align: center;}
+
+#lblLanguageHeader, #lnkTownFinderLink, #lblPages {padding: 0 0 0 10; font-weight: bold;}
+#lblLanguageValue {text-decoration: underline;}
