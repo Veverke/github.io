@@ -52,7 +52,7 @@ txtSearch.addEventListener("keyup", () =>
 });
 
 // Start the worker in which sql.js will run
-var worker = new Worker("/src/worker.sql-wasm.js");
+var worker = new Worker("worker.sql-wasm.js");
 worker.onerror = error;
 
 // Open a database
