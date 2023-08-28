@@ -14,11 +14,11 @@ startingImgId = parseInt(select.value.split('-')[1].replace(/\.[^/.]+$/, ""));
 lblLanguage.textContent = select.selectedOptions[0].getAttribute('data-language');
 townFinderLink.setAttribute('href', select.selectedOptions[0].getAttribute('data-townfinder-link'));
 var xhr = new XMLHttpRequest();
-xhr.open('GET', "books/" + select.value + ".db", true);
+xhr.open('GET', "/books/" + select.value + ".db", true);
 xhr.responseType = 'arraybuffer';
 
 xhr.onload = function(e) {
-	loadPageCount();
+	loadPageCount(this.response);
 };
 xhr.send();
 
@@ -30,11 +30,11 @@ select.addEventListener("change", (e) =>
 	townFinderLink.setAttribute('href', e.target.selectedOptions[0].getAttribute('data-townfinder-link'));
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', "books/" + select.value + ".db", true);
+	xhr.open('GET', "/books/" + select.value + ".db", true);
 	xhr.responseType = 'arraybuffer';
 
 	xhr.onload = function(e) {
-		loadPageCount();
+		loadPageCount(this.response);
 	};
 	xhr.send();
 });
@@ -52,7 +52,7 @@ txtSearch.addEventListener("keyup", () =>
 });
 
 // Start the worker in which sql.js will run
-var worker = new Worker("worker.sql-wasm.js");
+var worker = new Worker("/src/worker.sql-wasm.js");
 worker.onerror = error;
 
 // Open a database
@@ -141,17 +141,17 @@ function toc(msg) {
 	console.log((msg || 'toc') + ": " + dt + "ms");
 }
 
-function queryPageCount()
+function queryPageCount(response)
 {
-	var uInt8Array = new Uint8Array(this.response);
+	var uInt8Array = new Uint8Array(response);
 	db = new SQL.Database(uInt8Array);
 	var data = db.exec("SELECT COUNT(1) from Page;");
 	// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
 	return data[0].values[0];
 }
 
-function loadPageCount()
+function loadPageCount(response)
 {
 	var lblPages = document.getElementById('lblPages');
-	lblPages.textContent = "Pages: " + 
+	lblPages.textContent = "Pages: " + queryPageCount(response);
 }
