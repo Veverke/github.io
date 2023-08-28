@@ -9,3 +9,6 @@ td, th {padding: 5; text-align: center;}
 #lblLanguageValue {font-weight: bold; color:chocolate}
 
 .visitorCounter {margin: auto; width: 50%; border-style: dotted;}
+
+.flagCounter {display: contents;}
+    img {height: 85}
