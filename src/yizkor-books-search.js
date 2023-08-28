@@ -18,12 +18,7 @@ xhr.open('GET', "books/" + select.value + ".db", true);
 xhr.responseType = 'arraybuffer';
 
 xhr.onload = function(e) {
-	var uInt8Array = new Uint8Array(this.response);
-	db = new SQL.Database(uInt8Array);
-	var data = db.exec("SELECT COUNT(1) from Page;");
-	// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
-	var lblPages = document.getElementById('lblPages');
-	lblPages.textContent = "Pages: " + data[0].values[0];
+	loadPageCount();
 };
 xhr.send();
 
@@ -39,12 +34,7 @@ select.addEventListener("change", (e) =>
 	xhr.responseType = 'arraybuffer';
 
 	xhr.onload = function(e) {
-		var uInt8Array = new Uint8Array(this.response);
-		db = new SQL.Database(uInt8Array);
-		var data = db.exec("SELECT COUNT(1) from Page;");
-		// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
-		var lblPages = document.getElementById('lblPages');
-		lblPages.textContent = "Pages: " + data[0].values[0];
+		loadPageCount();
 	};
 	xhr.send();
 });
@@ -108,8 +98,6 @@ btnSearch.addEventListener("click", () =>
 	xhr.responseType = 'arraybuffer';
 
 	xhr.onload = function(e) {
-		//var uInt8Array = new Uint8Array(this.response);
-		//var db = new SQL.Database(uInt8Array);
 		var data = db.exec("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
 		// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
 
@@ -151,4 +139,19 @@ function tic() { tictime = performance.now() }
 function toc(msg) {
 	var dt = performance.now() - tictime;
 	console.log((msg || 'toc') + ": " + dt + "ms");
+}
+
+function queryPageCount()
+{
+	var uInt8Array = new Uint8Array(this.response);
+	db = new SQL.Database(uInt8Array);
+	var data = db.exec("SELECT COUNT(1) from Page;");
+	// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
+	return data[0].values[0];
+}
+
+function loadPageCount()
+{
+	var lblPages = document.getElementById('lblPages');
+	lblPages.textContent = "Pages: " + 
 }
