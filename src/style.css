@@ -12,3 +12,5 @@ td, th {padding: 5; text-align: center;}
 
 .flagCounter {display: contents;}
     img {height: 85}
+
+main {border-style: ridge; padding: 5;}
