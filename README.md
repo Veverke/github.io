@@ -6,7 +6,7 @@ Quoting [wikipedia](https://en.wikipedia.org/wiki/Yizkor_books):
 >
 > Since the 1990s, many of these books, or sections of them have been translated into English, digitized, and made available online.
 
-<b>This site combines together different pieces of software that turn yizkor book page scans into digitally searchable, online.</b>
+<b>This site combines together different pieces of software that make yizkor book page scans digitally searchable, online.</b>
 
 # Instructions:
   1. Pick up an Yizkor Book from the drop down list.
