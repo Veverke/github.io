@@ -1,3 +1,13 @@
+What are Yizkor Books ?
+Quoting [wikipedia](https://en.wikipedia.org/wiki/Yizkor_books): 
+> Yizkor books are memorial books commemorating a Jewish community destroyed during the Holocaust. The books are published by former residents or landsmanshaft societies as remembrances of homes, people and ways of life lost during World War II. Yizkor books usually focus > on a town but may include sections on neighboring smaller communities.
+>
+> Most of these books are written in Yiddish or Hebrew, some also include sections in English or other languages, depending on where they were published.
+>
+> Since the 1990s, many of these books, or sections of them have been translated into English, digitized, and made available online.
+
+<b>This site combines together different pieces of software that turn yizkor book page scans into digitally searchable, online.</b>
+
 # Instructions:
   1. Pick up an Yizkor Book from the drop down list.
   2. Enter a search term in the search textbox. Make sure your search term is in the yizkor book language (see language at the right of the drop down selection).
