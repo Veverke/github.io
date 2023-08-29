@@ -10,7 +10,25 @@ td, th {padding: 5; text-align: center;}
 
 .visitorCounter {margin: auto; width: 50%; border-style: dotted;}
 
-.flagCounter {display: contents;}
-    img {height: 85}
+.flagCounter {
+    display: contents;
+}
+.flagCounter img {
+    height: 85;
+}
+
+    
 
 main {border-style: ridge; padding: 5;}
+
+.feedback
+{
+    height: 11%;
+    float: right;
+    margin-right: 10;
+}
+
+.feedbackDiv
+{
+    margin-right: 80;
+}
