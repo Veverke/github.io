@@ -23,7 +23,7 @@ main {border-style: ridge; padding: 5;}
 
 .feedback
 {
-    height: 11%;
+    height: 60px;
     float: right;
     margin-right: 10;
 }
