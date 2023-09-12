@@ -24,7 +24,8 @@ xhr.send();
 
 select.addEventListener("change", (e) => 
 {
-	startingImgId = parseInt(e.target.value.split('-')[1].replace(/\.[^/.]+$/, ""));
+	var selectedValueComponents = select.value.split('-');
+	startingImgId = parseInt(selectedValueComponents[selectedValueComponents.length - 1].replace(/\.[^/.]+$/, ""));
 	outputElm.innerHTML = "";
 	lblLanguage.textContent = e.target.selectedOptions[0].getAttribute('data-language');
 	townFinderLink.setAttribute('href', e.target.selectedOptions[0].getAttribute('data-townfinder-link'));
@@ -101,7 +102,8 @@ btnSearch.addEventListener("click", () =>
 		var data = db.exec("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
 		// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
 
-		var bookName = select.value.split('-')[0];
+		var selectedValueComponents = select.value.split('-');
+		var bookName = selectedValueComponents.slice(0, selectedValueComponents.length - 1).join('-');
 		var results = data;
 		toc("Executing SQL");
 		if (results && results.length == 0) {
