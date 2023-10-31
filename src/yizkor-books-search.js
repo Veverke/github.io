@@ -6,6 +6,7 @@ var outputElm = document.getElementById('output');
 var errorElm = document.getElementById('error');
 var lblLanguage = document.getElementById('lblLanguageValue');
 var townFinderLink = document.getElementById('lnkTownFinderLink');
+var searchType = document.getElementById('ddlSearchType');
 var startingImgId;
 var db;
 
@@ -99,7 +100,14 @@ btnSearch.addEventListener("click", () =>
 	xhr.responseType = 'arraybuffer';
 
 	xhr.onload = function(e) {
-		var data = db.exec("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text = + '" + txtSearch.value  + "';");
+
+		let likeOperator = '';
+		if (searchType.value == 'contains')
+		{
+			likeOperator = '%';
+		}
+
+		var data = db.exec("SELECT p.Number as Page, l.Number as Line, w.Number as Word FROM Page p  JOIN Line l on p.Id = l.PageId JOIN Word w on w.LineId = l.Id WHERE w.Text LIKE + '" + likeOperator + txtSearch.value  + likeOperator + "';");
 		// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
 
 		var selectedValueComponents = select.value.split('-');
